@@ -4,5 +4,8 @@
   "categories": [
     "Mobile & Web App"
   ],
+  "host": {
+     "virtualization": true
+  },
   "icon": "https://www.vectorlogo.zone/logos/ionicframework/ionicframework-icon.svg"
 }
