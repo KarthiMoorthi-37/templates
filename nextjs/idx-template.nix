@@ -26,7 +26,7 @@
 
 		${
          if packageManager == "npm" then
-           "( cd $out && npm i --package-lock-only --ignore-scripts )"
+           "( cd $out && bun i --package-lock-only --ignore-scripts )"
          else
            ""
         }
