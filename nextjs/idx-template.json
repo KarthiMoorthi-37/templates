@@ -9,6 +9,17 @@
   "publisher": "Google",
   "params": [
     {
+      "id": "packageManager",
+      "name": "What package manager do you want to use?",
+      "type": "enum",
+      "default": "npm",
+      "options": {
+        "npm": "npm",
+        "bun": "bun"
+      },
+      "required": true
+    },
+    {
       "id": "language",
       "name": "Language",
       "type": "enum",
