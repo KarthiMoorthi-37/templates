@@ -6,7 +6,7 @@
     mkdir "$WS_NAME"
     cd "$WS_NAME"
     bun init -y
-    bun install @11ty/eleventy --save-dev
+    bunx install @11ty/eleventy --save-dev
     echo '# Hello World!' > index.md
     mkdir -p ".idx"
     cd ..
