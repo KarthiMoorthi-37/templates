@@ -17,7 +17,7 @@
     workspace = {
       # Runs when a workspace is first created with this `dev.nix` file
       onCreate = {
-        install = "npm ci --no-audit --prefer-offline --no-progress --timing";
+        install = "bun install";
         # Open editors for the following files by default, if they exist:
         default.openFiles = [ "index.md" ];
       };
