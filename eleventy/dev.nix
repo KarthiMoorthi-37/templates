@@ -28,7 +28,7 @@
       enable = true;
       previews = {
         web = {
-          command = ["npx" "@11ty/eleventy" "--serve" "--port=$PORT"];
+          command = ["bunx" "@11ty/eleventy" "--serve" "--port=$PORT"];
           manager = "web";
         };
       };
