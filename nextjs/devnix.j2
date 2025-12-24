@@ -20,7 +20,11 @@
     workspace = {
       # Runs when a workspace is first created with this `dev.nix` file
       onCreate = {
-        npm-install = "bun install";
+        {% if packageManager == 'bun' %}
+        install-deps = "bun install";
+        {% else %}
+        install-deps = "npm ci --no-audit --prefer-offline --no-progress --timing";
+        {% endif %}
         # Open editors for the following files by default, if they exist:
         default.openFiles = [
           # Cover all the variations of language, src-dir, router (app/pages)
@@ -37,7 +41,11 @@
       enable = true;
       previews = {
         web = {
+          {% if packageManager == 'bun' %}
           command = ["bun" "run" "dev" "--" "--port" "$PORT" "--hostname" "0.0.0.0"];
+          {% else %}
+          command = ["npm" "run" "dev" "--" "--port" "$PORT" "--hostname" "0.0.0.0"];
+          {% endif %}
           manager = "web";
         };
       };
