@@ -5,8 +5,8 @@
   bootstrap = ''
     mkdir "$WS_NAME"
     cd "$WS_NAME"
-    npm init -y
-    npm install @11ty/eleventy --save-dev
+    bun init -y
+    bun install @11ty/eleventy --save-dev
     echo '# Hello World!' > index.md
     mkdir -p ".idx"
     cd ..
@@ -20,6 +20,6 @@
     cp -rf "$out/.idx/airules.md" "$out/GEMINI.md"
     chmod -R u+w "$out"
 
-    cd "$out"; npm install --package-lock-only --ignore-scripts
+    cd "$out"; bun install
   '';
 }
