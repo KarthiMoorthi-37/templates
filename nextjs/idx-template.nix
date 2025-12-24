@@ -1,12 +1,10 @@
-{ pkgs, version ? "latest", importAlias ? "@/*", language ? "ts"
-, packageManager ? "npm", srcDir ? false, eslint ? false, app ? false
-, tailwind ? false, ... }: {
+{ pkgs, version ? "latest", importAlias ? "@/*", language ? "ts", packageManager ? "npm", srcDir ? false, eslint ? false, app ? false, tailwind ? false, ... }: {
 
-  packages = [ pkgs.nodejs_20 pkgs.yarn pkgs.nodePackages.pnpm pkgs.bun ];
+  packages = [ pkgs.nodejs_20 pkgs.yarn pkgs.nodePackages.pnpm pkgs.bun pkgs.j2cli ];
 
   bootstrap = ''
 		mkdir "$out"
-		npx create-next-app@${version} "$out" \
+		${if packageManager == "bun" then "bunx" else "npx"} create-next-app@${version} "$out" \
 			--yes \
 			--skip-install \
 			--import-alias=${importAlias} \
@@ -19,16 +17,9 @@
 
 		mkdir -p "$out"/.idx
 		chmod -R u+w "$out"
-		cp ${./dev.nix} "$out"/.idx/dev.nix
+    packageManager=${packageManager} j2 ${./devNix.j2} -o "$out/.idx/dev.nix"
 		cp -rf ${./.idx/airules.md} "$out/.idx/airules.md"
 		cp -rf "$out/.idx/airules.md" "$out/GEMINI.md"
 		chmod -R +w "$out"
-
-		${
-         if packageManager == "npm" then
-           "( cd $out && bun i --package-lock-only --ignore-scripts )"
-         else
-           ""
-        }
   '';
 }
