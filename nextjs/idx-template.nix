@@ -15,8 +15,8 @@
 			${if app then "--app" else "--no-app"} \
 			${if tailwind then "--tailwind" else "--no-tailwind"}
 
-    # Modify the dev script to prevent lock file issues
-    sed -i 's/"dev": "next dev"/"dev": "rm -f .next\/dev\/lock && next dev"/' "$out/package.json"
+    # Modify the dev script to prevent lock file issues. Escape the '&' for sed.
+    sed -i 's/"dev": "next dev"/"dev": "rm -f .next\/dev\/lock \&\& next dev"/' "$out/package.json"
 
 		mkdir -p "$out"/.idx
 		chmod -R u+w "$out"
